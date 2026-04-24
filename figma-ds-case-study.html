@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Figma Design System — The Straits Times · Rutuja Kulgod</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a1916;--ink-2:#5a5855;--ink-3:#9a9895;
+  --bg:#faf9f7;--bg-2:#f2f0ec;--card:#ffffff;
+  --b:rgba(26,25,22,.1);--b2:rgba(26,25,22,.22);
+  --hi:#e8e4dc;
+  --red:#c0392b;--navy:#0c2b57;--blue:#185fa5;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(250,249,247,.94);backdrop-filter:blur(14px);border-bottom:.5px solid var(--b);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nl{font-family:'EB Garamond',serif;font-size:18px;color:var(--ink);text-decoration:none}
+.nr{display:flex;align-items:center;gap:2rem;list-style:none}
+.nr a{font-size:13px;color:var(--ink-2);text-decoration:none;transition:color .15s}
+.nr a:hover{color:var(--ink)}
+
+/* BREADCRUMB */
+.bc{padding:1rem 2rem;font-size:12px;color:var(--ink-3);letter-spacing:.03em;border-bottom:.5px solid var(--b);background:var(--card)}
+.bc a{color:var(--ink-3);text-decoration:none}.bc a:hover{color:var(--ink)}
+.bc span{margin:0 .5rem}
+
+/* HERO */
+.hero{max-width:960px;margin:0 auto;padding:5rem 2rem 3rem}
+.ey{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:1.25rem}
+h1{font-family:'EB Garamond',serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:400;line-height:1.1;letter-spacing:-.02em;margin-bottom:1.75rem}
+h1 em,h2 em{font-style:italic}
+.hm{display:flex;flex-wrap:wrap;gap:2.5rem;margin-bottom:2rem;font-size:13px;color:var(--ink-2)}
+.mi strong{display:block;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:2px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:1.5rem}
+.tag{padding:4px 12px;background:var(--bg-2);border-radius:20px;font-size:12px;color:#3a3835}
+
+/* OUTCOME STRIP */
+.os{background:var(--ink);color:#fff;padding:2.5rem 2rem}
+.oi{max-width:960px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1px}
+@media(max-width:600px){.oi{grid-template-columns:1fr 1fr}}
+.oc{padding:1rem 2rem;border-right:.5px solid rgba(255,255,255,.12)}
+.oc:last-child{border-right:none}
+.on{font-family:'EB Garamond',serif;font-size:2.8rem;font-weight:400;line-height:1;display:block;margin-bottom:.3rem}
+.ol{font-size:12px;color:rgba(255,255,255,.55);line-height:1.5}
+
+hr.d{border:none;border-top:.5px solid var(--b)}
+
+/* CONTENT */
+.cw{max-width:960px;margin:0 auto;padding:0 2rem 6rem}
+.sec{padding:4rem 0 0}
+.sl{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.75rem}
+h2{font-family:'EB Garamond',serif;font-size:clamp(1.5rem,3vw,2.1rem);font-weight:400;line-height:1.22;letter-spacing:-.015em;margin-bottom:1.25rem}
+h3{font-size:1rem;font-weight:500;line-height:1.4;margin-bottom:.6rem;color:var(--ink)}
+p{color:var(--ink-2);margin-bottom:1rem;max-width:68ch}
+p:last-child{margin-bottom:0}
+
+/* OVERVIEW GRID */
+.ov{display:grid;grid-template-columns:1fr 300px;gap:3rem;margin-top:1.5rem;align-items:start}
+@media(max-width:700px){.ov{grid-template-columns:1fr}}
+.ov-card{background:var(--card);border:.5px solid var(--b);border-radius:12px;overflow:hidden}
+.ov-card table{width:100%;font-size:13px;border-collapse:collapse}
+.ov-card td{padding:9px 1.25rem;vertical-align:top}
+.ov-card td:first-child{color:var(--ink-3);font-size:11px;text-transform:uppercase;letter-spacing:.06em;width:44%;white-space:nowrap}
+.ov-card tr{border-bottom:.5px solid var(--b)}
+.ov-card tr:last-child{border-bottom:none}
+
+/* WHAT IS DS — definition highlight */
+.ds-def{background:var(--card);border:.5px solid var(--b);border-radius:14px;padding:2rem 2.5rem;margin-top:1.5rem;position:relative;overflow:hidden}
+.ds-def::before{content:'';position:absolute;left:0;top:0;width:4px;height:100%;background:var(--red)}
+.ds-def p{font-size:1.5rem;font-family:'EB Garamond',serif;font-weight:400;line-height:1.4;color:var(--ink);max-width:none;margin:0}
+.ds-def em{color:var(--red);font-style:normal}
+
+/* CHALLENGE / 3-COL CARDS */
+.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1.5rem}
+.cc{background:var(--card);border:.5px solid var(--b);border-top:3px solid var(--ink);border-radius:0 0 12px 12px;padding:1.25rem 1.25rem 1.5rem}
+.cn{font-size:11px;color:var(--ink-3);letter-spacing:.08em;margin-bottom:.4rem}
+.cc h3{font-size:14px;margin-bottom:.4rem}
+.cc p{font-size:13px;max-width:none}
+
+/* STAKEHOLDER BENEFIT CARDS */
+.bcard-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem}
+@media(max-width:620px){.bcard-grid{grid-template-columns:1fr}}
+.bcard{background:var(--card);border:.5px solid var(--b);border-radius:14px;padding:1.5rem}
+.bcard-title{font-size:18px;font-weight:700;margin-bottom:1rem;color:var(--ink);display:flex;align-items:center;gap:.5rem}
+.bcard ul{list-style:none;padding:0}
+.bcard ul li{font-size:13px;color:var(--ink-2);padding:.35rem 0;display:flex;gap:.5rem;align-items:flex-start;border-bottom:.5px solid var(--b)}
+.bcard ul li:last-child{border-bottom:none}
+.bcard ul li::before{content:'✅';font-size:11px;margin-top:3px;flex-shrink:0}
+
+/* TIER ARCHITECTURE */
+.tier-arch{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b);border-radius:12px;overflow:hidden;margin-top:1.5rem}
+@media(max-width:560px){.tier-arch{grid-template-columns:1fr}}
+.tier{padding:1.5rem 1.25rem}
+.tier--0{background:#fff5f5}
+.tier--1{background:#f0f5ff}
+.tier--2{background:#f5f0ff}
+.tier-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:.75rem}
+.tier--0 .tier-badge{background:#ffd6d6;color:#c0392b}
+.tier--1 .tier-badge{background:#d6e4ff;color:#1a5ba8}
+.tier--2 .tier-badge{background:#e4d6ff;color:#6b3aed}
+.tier h3{font-size:17px;font-weight:700;margin-bottom:.5rem;color:var(--ink)}
+.tier p{font-size:12px;color:var(--ink-2);max-width:none;margin-bottom:0}
+
+/* WHY THIS MATTERS — split layout */
+.why-block{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.5rem;align-items:start}
+@media(max-width:640px){.why-block{grid-template-columns:1fr}}
+.why-text h3{font-size:1.5rem;font-weight:700;line-height:1.2;margin-bottom:.4rem;color:var(--ink)}
+.why-sub{font-size:14px;font-weight:600;color:var(--blue);margin-bottom:.75rem;max-width:none}
+.why-img-wrap{border-radius:12px;overflow:hidden;border:.5px solid var(--b)}
+.why-img-wrap img{width:100%;display:block}
+
+/* NUTSHELL 6-GRID */
+.nutshell{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem}
+@media(max-width:580px){.nutshell{grid-template-columns:1fr 1fr}}
+.nut{background:var(--card);border:.5px solid var(--b);border-radius:12px;padding:1.25rem;text-align:center}
+.nut h3{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.3rem;color:var(--ink)}
+.nut p{font-size:11px;color:var(--ink-3);max-width:none;margin:0;font-style:italic}
+
+/* TOKEN SPLIT BLOCKS */
+.token-split{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.5rem;align-items:center}
+@media(max-width:600px){.token-split{grid-template-columns:1fr}}
+.token-text h3{font-size:1.5rem;font-weight:700;line-height:1.2;margin-bottom:.3rem;color:var(--ink)}
+.token-sub{font-size:14px;font-weight:600;color:var(--blue);margin-bottom:.75rem}
+.token-text p{font-size:14px;max-width:none}
+.token-visual{border-radius:12px;overflow:hidden;border:.5px solid var(--b)}
+.token-visual img{width:100%;display:block}
+
+/* COLOUR TOKEN DISPLAY — semantic */
+.status-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1rem}
+@media(max-width:480px){.status-grid{grid-template-columns:1fr}}
+.status-swatch{border-radius:12px;overflow:hidden;border:.5px solid var(--b)}
+.status-swatch-block{height:80px}
+.status-swatch-name{font-size:13px;font-weight:500;padding:.6rem 1rem;background:var(--card)}
+
+/* LIGHT/DARK TOKEN DISPLAY */
+.ldt-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem}
+@media(max-width:540px){.ldt-grid{grid-template-columns:1fr}}
+.ldt-panel{border-radius:12px;overflow:hidden;border:.5px solid var(--b)}
+.ldt-header{padding:.65rem 1rem;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.ldt-header--lt{background:#f8f8f8;color:#333;border-bottom:.5px solid var(--b)}
+.ldt-header--dk{background:#111;color:rgba(255,255,255,.6);border-bottom:.5px solid rgba(255,255,255,.1)}
+.ldt-row{display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:.6rem;padding:.45rem 1rem}
+.ldt-panel--lt .ldt-row{border-bottom:.5px solid var(--b)}
+.ldt-panel--dk .ldt-row{border-bottom:.5px solid rgba(255,255,255,.06);background:#1a1916}
+.ldt-sq{width:24px;height:24px;border-radius:5px}
+.ldt-role{font-size:12px;color:var(--ink-2)}
+.ldt-role--dk{font-size:12px;color:rgba(255,255,255,.7)}
+.ldt-val{font-size:10px;color:var(--ink-3);letter-spacing:.03em;font-family:monospace}
+.ldt-val--dk{font-size:10px;color:rgba(255,255,255,.3);font-family:monospace}
+
+/* IMAGE blocks */
+.img-full{width:100%;border-radius:12px;display:block;border:.5px solid var(--b);margin-top:1.25rem}
+.img-cap{font-size:11px;color:var(--ink-3);margin-top:.5rem;letter-spacing:.03em}
+.img-pair{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.25rem}
+@media(max-width:540px){.img-pair{grid-template-columns:1fr}}
+.img-pair img{width:100%;border-radius:10px;border:.5px solid var(--b);display:block}
+
+/* PROCESS FLOW */
+.pf{display:flex;gap:0;margin-top:1.5rem;overflow-x:auto;background:var(--card);border:.5px solid var(--b);border-radius:12px;padding:1.25rem}
+.ps{flex:1;min-width:95px;text-align:center;position:relative}
+.ps:not(:last-child)::after{content:'';position:absolute;top:16px;left:55%;width:90%;height:1px;background:var(--b2);z-index:0}
+.pn{width:32px;height:32px;border-radius:50%;background:var(--ink);color:#fff;font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;margin:0 auto .6rem;position:relative;z-index:1}
+.pl{font-size:11px;color:var(--ink-2);line-height:1.4;padding:0 4px}
+
+/* INSIGHT / CALLOUT */
+.ins{background:var(--hi);border-radius:10px;padding:1.25rem 1.5rem;margin-top:1.5rem;font-size:13px;color:var(--ink);line-height:1.6}
+.ins strong{font-weight:500}
+.callout-left-red{border-left:3px solid var(--red);padding-left:1rem;margin-top:1rem}
+.callout-left-red p{font-size:14px;font-weight:600;color:var(--navy);max-width:none;margin:0}
+
+/* TWO COL */
+.tc{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:1.5rem}
+@media(max-width:620px){.tc{grid-template-columns:1fr}}
+
+/* IMPACT GRID */
+.ig{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem;margin-top:1.5rem}
+.ic{background:var(--card);border:.5px solid var(--b);border-radius:12px;padding:1.25rem}
+.ic h3{font-size:13px;font-weight:500;margin-bottom:.4rem}
+.ic p{font-size:12px;color:var(--ink-2);max-width:none}
+
+/* NAMING DIAGRAM */
+.token-naming{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.5rem;align-items:center}
+@media(max-width:600px){.token-naming{grid-template-columns:1fr}}
+.naming-list{display:flex;flex-direction:column;gap:.6rem}
+.naming-item{display:flex;align-items:center;gap:.75rem;background:var(--card);border:.5px solid var(--b);border-radius:8px;padding:.6rem 1rem}
+.naming-tag{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;background:var(--bg-2);color:var(--navy);white-space:nowrap}
+.naming-desc{font-size:12px;color:var(--ink-2)}
+
+/* REFLECTION */
+.ref{background:var(--card);border:.5px solid var(--b);border-radius:12px;padding:2rem;margin-top:2rem}
+.ref h3{margin-bottom:.6rem}
+.ref p{max-width:none;margin-bottom:.75rem}
+.ref ul{padding-left:1.25rem;color:var(--ink-2);font-size:15px}
+.ref ul li{margin-bottom:.4rem}
+
+footer{border-top:.5px solid var(--b);padding:2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fl{font-family:'EB Garamond',serif;font-size:16px;color:var(--ink);text-decoration:none}
+.fn{display:flex;gap:1.5rem;list-style:none}
+.fn a{font-size:12px;color:var(--ink-3);text-decoration:none}
+.fn a:hover{color:var(--ink)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://rutujakulgod-art.github.io/My-Website/#" class="nl">Rutuja Kulgod</a>
+  <ul class="nr">
+    <li><a href="https://rutujakulgod-art.github.io/My-Website/#">Work</a></li>
+    <li><a href="https://rutujakulgod-art.github.io/My-Website/#">About</a></li>
+    <li><a href="https://rutujakulgod-art.github.io/My-Website/#">Contact</a></li>
+    <li><a href="https://www.linkedin.com/in/rutuk" target="_blank">LinkedIn ↗</a></li>
+  </ul>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="bc">
+  <a href="https://rutujakulgod-art.github.io/My-Website/#">Work</a>
+  <span>›</span>
+  Figma Design System — The Straits Times
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="ey">UX Case Study · SPH Media · The Straits Times</p>
+  <h1>Architecting a <em>design system</em> for Singapore's largest newsroom</h1>
+
+  <div class="hm">
+    <div class="mi"><strong>Role</strong>Digital Designer</div>
+    <div class="mi"><strong>Company</strong>SPH Media · The Straits Times</div>
+    <div class="mi"><strong>Timeline</strong>Nov 2023 – May 2025</div>
+    <div class="mi"><strong>Platform</strong>Web · Mobile editorial</div>
+    <div class="mi"><strong>Tools</strong>Figma · Figma Variables · Notion</div>
+  </div>
+
+  <div class="tags">
+    <span class="tag">Design System</span>
+    <span class="tag">Design Tokens</span>
+    <span class="tag">Component Library</span>
+    <span class="tag">Light / Dark Mode</span>
+    <span class="tag">Editorial</span>
+    <span class="tag">Newsroom</span>
+    <span class="tag">SPH Media</span>
+  </div>
+</div>
+
+<!-- OUTCOME STRIP -->
+<div class="os">
+  <div class="oi">
+    <div class="oc"><span class="on">3</span><span class="ol">Tier architecture — Tokens, Components, Templates</span></div>
+    <div class="oc"><span class="on">2</span><span class="ol">Complete colour themes — full Light &amp; Dark mode coverage</span></div>
+    <div class="oc"><span class="on">1</span><span class="ol">Single source of truth replacing fragmented file sprawl</span></div>
+  </div>
+</div>
+
+<hr class="d"/>
+
+<div class="cw">
+
+  <!-- OVERVIEW -->
+  <div class="sec">
+    <p class="sl">Overview</p>
+    <h2>The <em>context</em></h2>
+    <div class="ov">
+      <div>
+        <p>The Straits Times — Singapore's highest-circulation English-language newspaper — had no unified design system for its digital platforms. Designers worked from fragmented component libraries across multiple files, with no shared tokens, no consistent type scale, and no mode architecture.</p>
+        <p>I was embedded in the SPH Media digital design team as a Digital Designer to build the Figma Design Library from scratch — a complete 3-tier system covering design tokens, components, and page templates — and to introduce the team to Figma's advanced features, including Variables for multi-mode theming, that most designers hadn't used before.</p>
+      </div>
+      <div class="ov-card">
+        <table>
+          <tr><td>Company</td><td>SPH Media / The Straits Times</td></tr>
+          <tr><td>My Role</td><td>Digital Designer (Contract)</td></tr>
+          <tr><td>Timeline</td><td>Nov 2023 – May 2025</td></tr>
+          <tr><td>Team</td><td>Designers, Developers, Editorial</td></tr>
+          <tr><td>Tools</td><td>Figma, Figma Variables, Notion</td></tr>
+          <tr><td>Scope</td><td>Tokens → Components → Templates</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT IS A DESIGN SYSTEM -->
+  <div class="sec">
+    <p class="sl">What is a design system?</p>
+    <h2>The <em>foundation</em> we were building</h2>
+
+    <div class="ds-def">
+      <p>A collection of <em>reusable components,</em> governed by <em>clear standards,</em> that can be assembled together to build any number of <em>applications or products.</em></p>
+    </div>
+
+    <img class="img-full" src="images/Slide.png" alt="What is a design system — definition slide" loading="lazy"/>
+    <p class="img-cap">Core definition shared with the team during the design system kickoff</p>
+
+    <div class="tc" style="margin-top:2rem">
+      <div>
+        <img src="images/Slide-1.png" alt="Design system as a toolbox" class="img-full" style="margin-top:0" loading="lazy"/>
+        <p class="img-cap">A design system is a toolbox of reusable design elements — buttons, colours, fonts, and layout rules</p>
+      </div>
+      <div>
+        <img src="images/Slide-2.png" alt="Ensures consistency" class="img-full" style="margin-top:0" loading="lazy"/>
+        <p class="img-cap">Consistency: keeps the brand's look and feel the same everywhere, across every digital touchpoint</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY THIS MATTERS -->
+  <div class="sec">
+    <p class="sl">Why this matters</p>
+    <h2>The <em>case for building it</em></h2>
+
+    <!-- Saves time -->
+    <div class="why-block" style="margin-top:1.5rem">
+      <div class="why-text">
+        <h3>Saves time</h3>
+        <p class="why-sub">Design system as a common language between designer and engineers</p>
+        <p>Instead of reinventing the wheel for every new project, design systems provide pre-made components and guidelines. Basic elements are available similarly to a lego kit — allowing designers, stakeholders, and engineers to focus on more important things such as user experience, strategy, and solutioning.</p>
+      </div>
+      <div class="why-img-wrap">
+        <img src="images/Slide-3.png" alt="Saves time — bridging design and development gap" loading="lazy"/>
+      </div>
+    </div>
+
+    <!-- Works for Growth -->
+    <div class="why-block" style="margin-top:2rem">
+      <div class="why-text">
+        <h3>Works for growth</h3>
+        <p class="why-sub">Adds scalability to our brand through tokenisation</p>
+        <p>As the brand evolves and expands, the design system can easily adapt to new requirements. With tokenisation done right, changes can be made universally without a lot of manual effort from both engineering and design — saving manhours at every scale.</p>
+      </div>
+      <div class="why-img-wrap">
+        <img src="images/Slide-4.png" alt="Works for growth — scalability through tokenisation" loading="lazy"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- IN A NUTSHELL -->
+  <div class="sec">
+    <p class="sl">In a nutshell</p>
+    <h2>Six <em>reasons</em> a design system exists</h2>
+
+    <img class="img-full" src="images/Slide-5.png" alt="In a nutshell — consistency, single source of truth, brand trust, speed, shared language, reduce redundancy" loading="lazy"/>
+    <p class="img-cap">Consistency · Single source of truth · Brand trust · Speed of delivery · Shared language with dev · Reduce redundancy</p>
+
+    <div class="nutshell" style="margin-top:1.5rem">
+      <div class="nut"><h3>Consistency</h3><p>in the visual design language</p></div>
+      <div class="nut"><h3>Single Source of Truth</h3><p>+ quick onboarding</p></div>
+      <div class="nut"><h3>Increase Brand Trust</h3><p>through unified brand experiences</p></div>
+      <div class="nut"><h3>Speed of Delivery</h3><p>from idea to production</p></div>
+      <div class="nut"><h3>Shared Language with Dev</h3><p>easy handoff</p></div>
+      <div class="nut"><h3>Reduce Redundancy</h3><p>+ increase internal sharing</p></div>
+    </div>
+
+    <img class="img-full" src="images/Slide-6.png" alt="Brand identity diagram — core brand, experiments, adapt to context" loading="lazy"/>
+    <p class="img-cap">A design system encompasses core brand, experiments, and context-specific adaptations — all governed by Brand Identity + Principles</p>
+  </div>
+
+  <!-- BENEFITS PER STAKEHOLDER -->
+  <div class="sec">
+    <p class="sl">Benefits of the design system</p>
+    <h2>What it unlocks for <em>every team</em></h2>
+
+    <img class="img-full" src="images/Slide_2.png" alt="Benefits for Stakeholders, Designers, Engineers" loading="lazy"/>
+
+    <div class="bcard-grid" style="margin-top:1.5rem">
+      <div class="bcard">
+        <div class="bcard-title">Stakeholders 🧑‍💼</div>
+        <ul>
+          <li>Can decide on UX flow decisions faster</li>
+          <li>Can focus on more business goals instead of consistency</li>
+          <li>Can increase delivery and save time per feature</li>
+          <li>Better alignment on design patterns and styles</li>
+        </ul>
+      </div>
+      <div class="bcard">
+        <div class="bcard-title">Designers 🧑‍🎨</div>
+        <ul>
+          <li>Can improve design consistency and alignment</li>
+          <li>Can improve productivity, free up for more solutioning</li>
+          <li>Can improve usability metrics</li>
+          <li>Can solve more complex problems</li>
+          <li>Can reduce visual review process — there is a clear standard</li>
+        </ul>
+      </div>
+      <div class="bcard">
+        <div class="bcard-title">Engineers 🧑‍💻</div>
+        <ul>
+          <li>Can concentrate on core logic</li>
+          <li>Can reduce bugs</li>
+          <li>Can improve UI efficiently and consistently — scalability improves</li>
+          <li>Can decrease cost of QA — consistent tokens are used</li>
+          <li>Clearer alignment with designer on the designs</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- DS TIER STRUCTURE -->
+  <div class="sec">
+    <p class="sl">System architecture</p>
+    <h2>DS Tier Structure — a <em>3-level</em> system</h2>
+    <p>The design system is structured into 3 levels to ensure consistency and efficiency in our design and development processes. This simplified approach provides designers with the fundamental building blocks to construct any page or flow within The Straits Times digital platform.</p>
+
+    <img class="img-full" src="images/Slide-7.png" alt="DS Tier Structure — Level 0 Tokens, Level 1 Components, Level 2 Templates" loading="lazy"/>
+    <p class="img-cap">3-tier architecture: Level 0 Tokens (Typography, Icons, Colour) → Level 1 Components → Level 2 Templates</p>
+
+    <div class="tier-arch" style="margin-top:1.5rem">
+      <div class="tier tier--0">
+        <span class="tier-badge">Level 0</span>
+        <h3>Design Tokens</h3>
+        <p>The most basic and foundational building blocks. Tokens store style values such as colours, typography, and spacing — allowing values to be applied consistently across designs, code, tools, and platforms. They serve as a common language between designers and developers.</p>
+      </div>
+      <div class="tier tier--1">
+        <span class="tier-badge">Level 1</span>
+        <h3>Components</h3>
+        <p>The Component Kit builds upon the Token layer by offering pre-designed, reusable UI components — buttons, cards, navigation bars, and form elements. Components are assembled from tokens, so any token change propagates automatically.</p>
+      </div>
+      <div class="tier tier--2">
+        <span class="tier-badge">Level 2</span>
+        <h3>Templates</h3>
+        <p>The Template Kit represents the top tier — complete design templates for common use cases. Templates maintain consistent layout, margins, and structure. They serve as service flows for product delivery within ST's editorial platform.</p>
+      </div>
+    </div>
+
+    <img class="img-full" src="images/Slide_3.png" alt="Levels 0, 1, 3 — Tokens, Components, Templates visual breakdown" loading="lazy" style="margin-top:1.5rem"/>
+    <p class="img-cap">Visual breakdown of each level: Design Tokens → Components → Pages / Templates</p>
+  </div>
+
+  <!-- LV 0 DESIGN TOKENS -->
+  <div class="sec">
+    <p class="sl">Level 0 — Design tokens</p>
+    <h2>The most basic and foundational <em>building block</em></h2>
+
+    <!-- Token explanation split -->
+    <div class="token-split" style="margin-top:1.5rem">
+      <div class="token-text">
+        <p class="why-sub">Token names are aligned with tech</p>
+        <p>Tokens store style values, such as colours and fonts, allowing style values to be applied consistently across designs, code, tools, and platforms. They serve as a common language between designers and developers. Token names are established that align directly with engineering — eliminating translation ambiguity at every handoff.</p>
+      </div>
+      <div class="token-visual">
+        <img src="images/Slide-8.png" alt="LV 0 Design Tokens — token naming and structure" loading="lazy"/>
+      </div>
+    </div>
+
+    <div class="token-split" style="margin-top:1.5rem">
+      <div class="token-text">
+        <p class="why-sub">Icons / Colour / Spacing are tokenised and named</p>
+        <p>Colour palettes, typography scales, and spacing values are all tokenised and named in Figma Variables. A single colour change in the token layer propagates instantly across every component and template that references it — without any manual find-and-replace.</p>
+      </div>
+      <div class="token-visual">
+        <img src="images/Slide-9.png" alt="Design tokens — colours, typography, spacing tokenised" loading="lazy"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY WE NEED COLOUR TOKENS -->
+  <div class="sec">
+    <p class="sl">Colour tokens — the problem</p>
+    <h2>Why we need this — <em>problems colour tokens solve</em></h2>
+
+    <div class="why-block" style="margin-top:1.5rem">
+      <div class="why-text">
+        <div style="margin-bottom:1.25rem">
+          <h3>Reduce redundant duplicates</h3>
+          <p style="max-width:none">Prevent duplicate colours by assigning specific meanings to each token, ensuring consistent colour usage across the entire platform.</p>
+        </div>
+        <div style="margin-bottom:1.25rem">
+          <h3>Consistent naming and structure</h3>
+          <p style="max-width:none">Establish a standardised and clear naming structure, reducing inconsistencies and improving communication between designers and developers.</p>
+        </div>
+        <div>
+          <h3>Reduce confusion and redundant colours</h3>
+          <p style="max-width:none">By having a single source of truth we avoid confusion and inconsistencies. An audit found duplicates of multiple shades of grey with different naming styles — this eliminated that entirely.</p>
+        </div>
+      </div>
+      <div class="why-img-wrap">
+        <img src="images/Slide-10.png" alt="Why we need colour tokens — duplicating colours problem" loading="lazy"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- COLOUR TOKENS — LIGHT & DARK -->
+  <div class="sec">
+    <p class="sl">Colour tokens</p>
+    <h2>Light and Dark mode <em>colour token structure</em></h2>
+    <p>Colour tokens are semantically named style labels that are each assigned 2 colour values — one for the default palette (light mode) and another for the dark mode palette. A single token name resolves to the correct colour in each mode automatically.</p>
+
+    <img class="img-full" src="images/Slide-11.png" alt="Colour tokens — Light mode and Dark mode comparison" loading="lazy"/>
+    <p class="img-cap">Button Primary Default: #0C2B57 in Light mode (14.01:1 contrast) · #2B568F in Dark mode (2.52:1 contrast) — each token carries both values</p>
+
+    <!-- Live token display -->
+    <div class="ldt-grid" style="margin-top:1.5rem">
+      <div class="ldt-panel ldt-panel--lt">
+        <div class="ldt-header ldt-header--lt">Light Mode</div>
+        <div class="ldt-row">
+          <div class="ldt-sq" style="background:#0c2b57"></div>
+          <span class="ldt-role">Button Primary Default</span>
+          <span class="ldt-val">#0C2B57</span>
+        </div>
+        <div class="ldt-row">
+          <div class="ldt-sq" style="background:#88929d"></div>
+          <span class="ldt-role">Button Secondary Default</span>
+          <span class="ldt-val">#88929D</span>
+        </div>
+        <div class="ldt-row">
+          <div class="ldt-sq" style="background:#00c8ff"></div>
+          <span class="ldt-role">Button Premium Default</span>
+          <span class="ldt-val">#00C8FF</span>
+        </div>
+        <div class="ldt-row">
+          <div class="ldt-sq" style="background:#c0392b"></div>
+          <span class="ldt-role">Stroke Error</span>
+          <span class="ldt-val">#C0392B</span>
+        </div>
+        <div class="ldt-row">
+          <div class="ldt-sq" style="background:#2d9e4d"></div>
+          <span class="ldt-role">Stroke Success</span>
+          <span class="ldt-val">#2D9E4D</span>
+        </div>
+        <div class="ldt-row">
+          <div class="ldt-sq" style="background:#1a1916;border:.5px solid var(--b)"></div>
+          <span class="ldt-role">Icon Main</span>
+          <span class="ldt-val">#1A1916</span>
+        </div>
+        <div class="ldt-row">
+          <div class="ldt-sq" style="background:#5a5855"></div>
+          <span class="ldt-role">Icon Disabled</span>
+          <span class="ldt-val">#5A5855</span>
+        </div>
+        <div class="ldt-row">
+          <div class="ldt-sq" style="background:#ffffff;border:.5px solid var(--b)"></div>
+          <span class="ldt-role">Background Main</span>
+          <span class="ldt-val">#FFFFFF</span>
+        </div>
+      </div>
+
+      <div class="ldt-panel ldt-panel--dk">
+        <div class="ldt-header ldt-header--dk">Dark Mode</div>
+        <div class="ldt-row">
+          <div class="ldt-sq" style="background:#2b568f"></div>
+          <span class="ldt-role--dk">Button Primary Default</span>
+          <span class="ldt-val--dk">#2B568F</span>
+        </div>
+        <div class="ldt-row">
+          <div class="ldt-sq" style="background:#d8d8d8"></div>
+          <span class="ldt-role--dk">Button Secondary Default</span>
+          <span class="ldt-val--dk">#D8D8D8</span>
+        </div>
+        <div class="ldt-row">
+          <div class="ldt-sq" style="background:#00c8ff"></div>
+          <span class="ldt-role--dk">Button Premium Default</span>
+          <span class="ldt-val--dk">#00C8FF</span>
+        </div>
+        <div class="ldt-row">
+          <div class="ldt-sq" style="background:#c0392b"></div>
+          <span class="ldt-role--dk">Stroke Error</span>
+          <span class="ldt-val--dk">#C0392B</span>
+        </div>
+        <div class="ldt-row">
+          <div class="ldt-sq" style="background:#2d9e4d"></div>
+          <span class="ldt-role--dk">Stroke Success</span>
+          <span class="ldt-val--dk">#2D9E4D</span>
+        </div>
+        <div class="ldt-row">
+          <div class="ldt-sq" style="background:#ffffff"></div>
+          <span class="ldt-role--dk">Icon Main</span>
+          <span class="ldt-val--dk">#FFFFFF</span>
+        </div>
+        <div class="ldt-row">
+          <div class="ldt-sq" style="background:#9a9895"></div>
+          <span class="ldt-role--dk">Icon Disabled</span>
+          <span class="ldt-val--dk">#9A9895</span>
+        </div>
+        <div class="ldt-row">
+          <div class="ldt-sq" style="background:#1a1916"></div>
+          <span class="ldt-role--dk">Background Main</span>
+          <span class="ldt-val--dk">#1A1916</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Full colour token export image -->
+    <img class="img-full" src="images/Color_tokens_-_Light_and_Dark_theme.png" alt="Full colour token export — Light and Dark theme" loading="lazy" style="margin-top:1.5rem"/>
+    <p class="img-cap">Complete colour token reference export from Figma — showing full Light and Dark mode token mapping side by side</p>
+  </div>
+
+  <!-- COLOUR TOKEN NAMING -->
+  <div class="sec">
+    <p class="sl">Colour token naming</p>
+    <h2>Semantic naming — <em>how and when to use</em> each token</h2>
+    <p>Tokens are built using semantic names that help provide an understanding of how or when the token should be used. Token names are aligned with engineering conventions from day one.</p>
+
+    <div class="token-naming" style="margin-top:1.5rem">
+      <div class="naming-list">
+        <div class="naming-item">
+          <span class="naming-tag">Icon-Main</span>
+          <span class="naming-desc">Used for all primary icons in default state</span>
+        </div>
+        <div class="naming-item">
+          <span class="naming-tag">Text-Primary</span>
+          <span class="naming-desc">Headlines and emphasised text throughout</span>
+        </div>
+        <div class="naming-item">
+          <span class="naming-tag">Text-Secondary</span>
+          <span class="naming-desc">Body copy, descriptions, and paragraph text</span>
+        </div>
+        <div class="naming-item">
+          <span class="naming-tag">Button-Premium-Default</span>
+          <span class="naming-desc">Premium subscription CTAs and upsells</span>
+        </div>
+        <div class="naming-item">
+          <span class="naming-tag">Stroke-Error</span>
+          <span class="naming-desc">Form validation errors and destructive states</span>
+        </div>
+        <div class="naming-item">
+          <span class="naming-tag">Background-Main</span>
+          <span class="naming-desc">Primary page and card background surface</span>
+        </div>
+      </div>
+      <div class="why-img-wrap">
+        <img src="images/Slide-12.png" alt="Colour token naming — semantic names mapped to UI elements" loading="lazy"/>
+      </div>
+    </div>
+
+    <div class="ins" style="margin-top:1.5rem">
+      <strong>Principle:</strong> Semantic naming means the token name tells you <em>what it does</em>, not what it looks like. <code style="font-size:12px;background:var(--bg-2);padding:1px 5px;border-radius:3px">Button-Primary-Default</code> is more useful than <code style="font-size:12px;background:var(--bg-2);padding:1px 5px;border-radius:3px">navy-blue</code> — because when the colour changes, the name remains correct.
+    </div>
+  </div>
+
+  <!-- STATUS TOKENS -->
+  <div class="sec">
+    <p class="sl">Colour tokens — status</p>
+    <h2>Status colours — <em>four token states</em></h2>
+    <p>Status tokens are used in components that can showcase a particular status to the user. There are 4 status types — success, disabled, alert, error. However, states are dependent on the use case of the token and will not be applied to ALL components.</p>
+
+    <div class="tc" style="align-items:start">
+      <div>
+        <img class="img-full" src="images/Slide-13.png" alt="Colour token status — success, disabled, alert, error" loading="lazy" style="margin-top:1rem"/>
+        <p class="img-cap">4 status tokens: Success (green) · Disabled (grey) · Alert (amber) · Error (red)</p>
+      </div>
+      <div style="padding-top:1rem">
+        <div class="status-grid">
+          <div class="status-swatch">
+            <div class="status-swatch-block" style="background:#2d9e4d"></div>
+            <div class="status-swatch-name">Success</div>
+          </div>
+          <div class="status-swatch">
+            <div class="status-swatch-block" style="background:#b0b0b0"></div>
+            <div class="status-swatch-name">Disabled</div>
+          </div>
+          <div class="status-swatch">
+            <div class="status-swatch-block" style="background:#c87800"></div>
+            <div class="status-swatch-name">Alert</div>
+          </div>
+          <div class="status-swatch">
+            <div class="status-swatch-block" style="background:#c0392b"></div>
+            <div class="status-swatch-name">Error</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LV 1 COMPONENTS -->
+  <div class="sec">
+    <p class="sl">Level 1 — Components</p>
+    <h2>Tokens assembled into <em>reusable UI elements</em></h2>
+
+    <div class="token-split" style="margin-top:1.5rem">
+      <div class="token-text">
+        <p class="why-sub">Tokens are then used to build components — like LEGO blocks</p>
+        <p>Components are reusable design elements that ensure consistent and efficient user interface development. They save time by providing pre-built UI elements like buttons and forms, maintain brand identity, and support modular design. Every component is assembled from tokens — meaning any token change cascades automatically to every component instance.</p>
+        <p style="margin-top:.75rem">Components ship with multiple variants: default, hover, active, and disabled states. All built for both Light and Dark mode simultaneously using Figma Variables.</p>
+      </div>
+      <div class="token-visual">
+        <img src="images/Slide-14.png" alt="LV 1 Components — checkboxes, radio buttons, buttons built from tokens" loading="lazy"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- LV 2 TEMPLATES -->
+  <div class="sec">
+    <p class="sl">Level 2 — Templates</p>
+    <h2>Components assembled into <em>page blueprints</em></h2>
+
+    <div class="token-split" style="margin-top:1.5rem">
+      <div class="token-text">
+        <p class="why-sub">Pages are built based on existing component designs</p>
+        <p>Templates are pre-designed, structured layouts or blueprints that serve as a foundation for creating specific types of content or pages in design and development. They provide a consistent starting point, helping designers and developers streamline their work by offering predefined arrangements of elements that abide by UX patterns in ST.</p>
+        <p style="margin-top:.75rem">New stories and editorial features start from a template — never a blank frame. This eliminated the 14-day production cycle for special reports.</p>
+      </div>
+      <div class="token-visual">
+        <img src="images/Slide-15.png" alt="LV 2 Templates — ST article template with components assembled into a page" loading="lazy"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROCESS -->
+  <div class="sec">
+    <p class="sl">How I built it</p>
+    <h2>The <em>process</em></h2>
+
+    <div class="pf">
+      <div class="ps"><div class="pn">01</div><div class="pl">Audit &amp;<br/>Interviews</div></div>
+      <div class="ps"><div class="pn">02</div><div class="pl">Define<br/>Token Layer</div></div>
+      <div class="ps"><div class="pn">03</div><div class="pl">Build<br/>UI Atoms</div></div>
+      <div class="ps"><div class="pn">04</div><div class="pl">Compose<br/>Components</div></div>
+      <div class="ps"><div class="pn">05</div><div class="pl">Build<br/>Templates</div></div>
+      <div class="ps"><div class="pn">06</div><div class="pl">Team<br/>Handoff</div></div>
+    </div>
+
+    <div class="ins">
+      <strong>Key insight:</strong> The most painful moment for the team wasn't building components — it was propagating a change. An audit found duplicate shades of grey with different naming conventions across multiple files. The token layer was built first, precisely because everything else depends on it being right.
+    </div>
+  </div>
+
+  <!-- IMPACT -->
+  <div class="sec">
+    <p class="sl">Outcomes</p>
+    <h2><em>Impact</em></h2>
+
+    <div class="ig">
+      <div class="ic">
+        <h3>Unified visual identity</h3>
+        <p>Single design library replaced fragmented file sprawl. ST's brand is now consistent across all digital touchpoints for the first time.</p>
+      </div>
+      <div class="ic">
+        <h3>Light &amp; Dark mode at zero cost</h3>
+        <p>Full colour mode switching via Figma Variables — no duplicated component sets, no manual overrides. Mode parity shipped on day one.</p>
+      </div>
+      <div class="ic">
+        <h3>Faster production cycles</h3>
+        <p>Templates reduced editorial story production from ~14 days to under 5 days. New stories start from a proven scaffold, not a blank frame.</p>
+      </div>
+      <div class="ic">
+        <h3>Shared language with engineering</h3>
+        <p>Semantic token names align directly with CSS variable conventions — developers ship from token references, not visual interpretation.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="sec">
+    <div class="ref">
+      <p class="sl" style="margin-bottom:.5rem">My learnings</p>
+      <h3>What this project taught me</h3>
+      <ul>
+        <li>A design system is an organisational product, not a Figma file. The hardest problem was building trust — getting the team to adopt a shared source of truth rather than maintaining local copies.</li>
+        <li>The token layer is the highest-leverage investment in the entire system. Every shortcut at Level 0 multiplies into complexity at Level 1 and Level 2.</li>
+        <li>Figma Variables transformed the dark mode problem from a maintenance burden into a non-issue. Building for both modes simultaneously from day one was the single best architectural decision.</li>
+        <li>Semantic naming pays for itself immediately. When a colour value changes, a semantically named token stays correct — a colour-name token does not.</li>
+        <li>Onboarding the team to advanced Figma features (Variables, component properties) was as important as the system itself. A system nobody understands is a system nobody uses.</li>
+      </ul>
+      <h3 style="margin-top:1.25rem">Next steps</h3>
+      <p style="max-width:none">Extend the token system to native mobile (iOS / Android) using the same Figma Variables architecture. Build a documentation site alongside the Figma library so onboarding new designers takes hours, not days. Introduce component usage tracking to identify which components are most adopted — and which patterns accumulate as dead weight over time.</p>
+      <div class="ins" style="margin-top:1.25rem">
+        <strong>Key takeaway:</strong> A design system delivers value twice — once when components are reused, and again when they prevent inconsistent decisions from being made at all. The investment in governance, naming, and onboarding is what separates a library from a system.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <a href="https://rutujakulgod-art.github.io/My-Website/#" class="fl">Rutuja Kulgod</a>
+  <ul class="fn">
+    <li><a href="https://rutujakulgod-art.github.io/My-Website/#">Work</a></li>
+    <li><a href="https://rutujakulgod-art.github.io/My-Website/#">About</a></li>
+    <li><a href="https://rutujakulgod-art.github.io/My-Website/#">Contact</a></li>
+    <li><a href="https://www.linkedin.com/in/rutuk" target="_blank">LinkedIn ↗</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>
